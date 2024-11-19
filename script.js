@@ -20,10 +20,8 @@ const productos = [
 
 
 
-// Array para almacenar los productos en el carrito
 let carrito = [];
 
-// Función para agregar un producto al carrito
 function agregarAlCarrito(idProducto) {
     const producto = productos.find((prod) => prod.id === idProducto);
     if (producto) {
@@ -41,18 +39,13 @@ function mostrarCarrito() {
     }
 
     let mensaje = "Productos en el carrito:\n";
-    let total = 0; // Variable para almacenar el total
+    let total = 0; 
 
-    // Recorrer los productos del carrito
     carrito.forEach((producto, index) => {
         mensaje += `${index + 1}. ${producto.nombre} - $${producto.precio}\n`;
-        total += producto.precio; // Sumar el precio del producto al total
+        total += producto.precio; 
     });
-
-    // Agregar el total al mensaje
     mensaje += `\nTotal: $${total}`;
-
-    // Mostrar el mensaje con los productos y el total
     alert(mensaje);
 }
 
@@ -66,7 +59,7 @@ document.querySelectorAll(".agregar-carrito").forEach((boton) => {
     });
 });
 
-// Botón del carrito
+//Botón del carrito
 const botonCarrito = document.querySelector("button img[src*='carrito_compras']");
 botonCarrito?.addEventListener("click", (e) => {
     e.preventDefault();
@@ -74,7 +67,7 @@ botonCarrito?.addEventListener("click", (e) => {
 });
 
 
-// Función para buscar productos por nombre y categoría
+//buscar productos por nombre y categoría
 function findProductos(nombre, categoria) {
     return productos.filter(producto => {
         const coincideNombre = producto.nombre.toLowerCase().includes(nombre.toLowerCase());
@@ -83,10 +76,10 @@ function findProductos(nombre, categoria) {
     });
 }
 
-// Función para mostrar los resultados de búsqueda en el body
+//resultados de búsqueda en el body
 function mostrarResultados(productosFiltrados) {
     const divResultados = document.getElementById("resultados");
-    divResultados.innerHTML = ""; // Limpiar los resultados anteriores
+    divResultados.innerHTML = "";
 
     if (productosFiltrados.length > 0) {
         productosFiltrados.forEach(producto => {
@@ -104,16 +97,14 @@ function mostrarResultados(productosFiltrados) {
     }
 }
 
-// Función que se ejecuta cuando se hace clic en el botón de búsqueda
+//botón de búsqueda
 document.getElementById("btnBuscar").addEventListener("click", (event) => {
-    event.preventDefault(); // Evitar que la página se recargue
+    event.preventDefault(); 
 
     const nombreProducto = document.getElementById("buscarInput").value;
     const categoriaSeleccionada = document.getElementById("categoriaSelect").value;
     
-    // Buscar productos filtrados por nombre y categoría
     const productosFiltrados = findProductos(nombreProducto, categoriaSeleccionada);
     
-    // Mostrar los resultados
     mostrarResultados(productosFiltrados);
 });
